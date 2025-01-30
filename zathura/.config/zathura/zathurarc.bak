@@ -1,0 +1,91 @@
+### Settings from original zathurarc ###
+map u scroll half-up
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map p print
+map g goto top
+map i recolor
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
+set window-title-home-tilde true
+set statusbar-basename true
+set selection-clipboard clipboard
+set recolor 'true'
+set recolor 'true'
+
+### zathura-pywal ###
+# Allow recolor
+set recolor 'true'
+
+# Don't allow original hue when recoloring
+set recolor-keephue 'false'
+
+# Don't keep original image colors while recoloring
+set recolor-reverse-video 'false'
+
+# Command line completion entries
+set completion-fg '#ccd2e3'
+set completion-bg '#030411'
+
+# Command line completion group elements
+set completion-group-fg '#444557'
+set completion-group-bg '#030411'
+
+# Current command line completion element
+set completion-highlight-fg '#030411'
+set completion-highlight-bg '#ccd2e3'
+
+# Default foreground/background color
+set default-bg rgba(3,4,17,1)
+
+# Input bar
+set inputbar-fg '#ccd2e3'
+set inputbar-bg '#030411'
+
+# Notification
+set notification-fg '#ccd2e3'
+set notification-bg '#030411'
+
+# Error notification
+set notification-error-fg '#ccd2e3'
+set notification-error-bg '#52566D'
+
+# Warning notification
+set notification-warning-fg '#ccd2e3'
+set notification-warning-bg '#52566D'
+
+# Tab - TODO
+# set tabbar-fg
+# set tabbar-bg
+
+# Focused tab - TODO
+# set tabbar-focus-fg
+# set tabbar-focus-bg
+
+# Status bar
+set statusbar-fg '#ccd2e3'
+set statusbar-bg '#030411'
+
+# Highlighting parts of the document (e.g. show search results)
+set highlight-color '#444557'
+set highlight-active-color '#444557'
+
+# Represent light/dark colors in recoloring mode
+set recolor-lightcolor rgba(0,0,0,0)
+set recolor-darkcolor '#ccd2e3'
+
+# 'Loading...' text
+set render-loading-fg '#ccd2e3'
+set render-loading-bg '#030411'
+
+# Index mode
+set index-fg '#ccd2e3'
+set index-bg '#030411'
+
+# Selected element in index mode
+set index-active-fg '#030411'
+set index-active-bg '#ccd2e3'

@@ -1,0 +1,16 @@
+### Settings from original zathurarc ###
+map u scroll half-up
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map p print
+map g goto top
+map i recolor
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
+set window-title-home-tilde true
+set statusbar-basename true
+set selection-clipboard clipboard
