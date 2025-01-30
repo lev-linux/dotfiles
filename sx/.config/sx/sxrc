@@ -1,0 +1,12 @@
+#!/bin/sh
+exec >/dev/null 2>&1
+
+# xrandr --setprovideroutputsource modesetting NVIDIA-0
+# xrandr --auto
+xrandr --dpi 96
+
+syncthing --no-browser &
+kmonad ~/.config/kmonad.kbd &
+scrond -f ~/.config/cron/crontab
+
+exec dbus-run-session -- dwm
