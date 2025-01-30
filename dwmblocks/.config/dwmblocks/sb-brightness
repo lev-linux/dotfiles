@@ -1,0 +1,3 @@
+#!/bin/sh
+
+printf " %.*f%%" 0 $(brillo -G)

@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Show the connected channel: SSID for Wi-Fi or 🌐 for Ethernet, 📡 if none.
+
+# Function to determine Wi-Fi strength icon
+get_wifi_icon() {
+    local strength=$1
+    if [ "$strength" -ge 70 ]; then
+        echo "󰤥"  # Excellent
+    elif [ "$strength" -ge 40 ]; then
+        echo "󰤢"  # Good
+    elif [ "$strength" -ge 10 ]; then
+        echo "󰤟"  # Fair
+    else
+        echo "󰤯"  # Weak
+    fi
+}
+
+# Check Wi-Fi connection
+if grep -xq 'up' /sys/class/net/w*/operstate 2>/dev/null; then
+    wifi_strength=$(awk '/^\s*w/ { print int($3 * 100 / 70) }' /proc/net/wireless)
+    wifiicon="$(get_wifi_icon "$wifi_strength")"
+    connected_channel="$wifiicon"
+elif grep -xq 'down' /sys/class/net/w*/operstate 2>/dev/null; then
+    connected_channel=""
+fi
+
+# Check Ethernet connection
+ethernet_status=$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)
+if [ "$ethernet_status" = "🌐" ]; then
+    connected_channel="🌐"
+fi
+
+# Final output: show only the connected channel
+if [ -n "$connected_channel" ]; then
+    printf "%s\n" "$connected_channel"
+else
+    printf "📡\n"  # No connection
+fi

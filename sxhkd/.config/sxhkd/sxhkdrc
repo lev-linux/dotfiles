@@ -1,0 +1,104 @@
+#           _     _       _
+#  _____  _| |__ | | ____| |
+# / __\ \/ / '_ \| |/ / _` |
+# \__ \>  <| | | |   < (_| |
+# |___/_/\_\_| |_|_|\_\__,_|
+# 
+
+# Terminal programs
+super + Return
+	$TERMINAL
+
+super + alt + t
+	pgrep termdown || timer && timer stop
+
+super + n 
+	$TERMINAL nnn -C -d -e -c
+super + B
+	$TERMINAL btop
+
+super + e
+	$TERMINAL $EDITOR
+
+#dmenu
+super + d
+	dmenu_run
+
+super + P
+	passmenu
+
+super + p
+	arandr
+
+super + ctrl + w
+	netmenu
+
+super + ctrl + b
+	bluemenu
+
+super + equal
+	=
+
+super + L
+    xset s activate
+
+super + w
+	$BROWSER
+
+super + control + c
+	clipmenu -i
+
+## Brightness
+{XF86MonBrightnessUp,XF86MonBrightnessDown}
+	brightness {up 5,down 5}
+
+## Audio
+{XF86AudioRaiseVolume,XF86AudioLowerVolume,XF86AudioMute, XF86AudioMicMute}
+	volume {raise,lower,toggle, toggle-mic}
+
+{XF86AudioPlay,XF86AudioNext,XF86AudioPrev}
+	playerctl {play-pause,next,previous}
+
+super + alt + p
+	$TERMINAL pulsemixer
+
+## Screenshots
+Print
+	screenshot fullscreen
+
+Print + shift
+	screenshot focus
+
+Print + ctrl
+	screenshot select
+
+super + S
+	screenshot select
+
+super + ctrl + S
+	screenshot fullscreen
+
+## record screen
+super + r
+	record-screen
+
+### screen keys
+super + R
+	xscreenkey
+
+### webcam
+super + alt + r
+	camera
+
+super + x 
+	notes
+
+# dunst
+ctrl + space
+	dunstctl close-all
+
+ctrl + shift + space
+	dunstctl context
+
+ctrl + grave
+	dunstctl history-pop

@@ -1,0 +1,62 @@
+    # _    _ _           ____   ____ 
+   # / \  | (_) __ _ ___|  _ \ / ___|
+  # / _ \ | | |/ _` / __| |_) | |    
+ # / ___ \| | | (_| \__ \  _ <| |___ 
+# /_/   \_\_|_|\__,_|___/_| \_\\____|
+
+# xbps pkg manager
+alias xr='doas xbps-remove -R'
+alias fp='fuzzypkg'
+
+# Shortcuts
+alias e='$EDITOR'
+alias s='sc-im'
+
+# trash
+alias rm='trash'
+
+# nnn
+alias n='nnn -C -d -e -c'
+export NNN_COLORS="263"
+export NNN_PLUG=';:fzplug;d:dragdrop;c:fzcd;i:imgview;F:fixname;x:togglex;f:fzopen;o:!setsid mimeo "$nnn"&'
+export NNN_BMS='e:~/Documents;d:~/Downloads;p:~/Pictures;v:~/Videos;u:~/Music;m:/media/'
+export NNN_OPENER=mimeo
+export NNN_TRASH=1
+
+# scrcpy
+alias adb-restart='adb kill-server && adb start-server'
+
+# fzf
+alias o='xdg-open "$(fzf)"'
+
+# git
+alias g='git'
+alias gb="git branch"
+alias gbd='gb -D'
+alias gc="git checkout"
+alias gcb="gc -b"
+alias gap="git apply"
+alias gad='git add'
+alias gadu='git add -u'
+alias gco='git commit'
+alias gm='git merge'
+alias gcl='git clone'
+alias gp='git push'
+alias gpf='gp -f'
+alias gs='git status'
+alias gd='git diff'
+alias d='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# system
+alias cp='cp -ivr'
+alias mv='mv -iv'
+alias grep='grep --color=auto'
+alias mkdir='mkdir -vp'
+alias wget="wget --hsts-file ~/.cache/wget-hsts"
+
+alias sudo='doas'
+
+alias nrst='doas sv restart NetworkManager'
+
+# fetch scripts
+alias nf='neofetch'

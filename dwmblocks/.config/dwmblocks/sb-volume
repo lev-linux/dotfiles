@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Get speaker mute and volume status
+mute=$(pulsemixer --get-mute)
+case $mute in
+    "0" ) 
+        mute="🔊 " 
+        vol="$(pulsemixer --get-volume | awk '{print $1}')%" 
+        ;;
+    "1" ) 
+        mute="🔇" 
+        vol="" 
+        ;;
+esac
+
+echo "$mute$vol"

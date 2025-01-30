@@ -1,0 +1,20 @@
+[user]
+	email = salah2112004@gmail.com
+	signingkey = 3C32E0C1F2A269F1485EF176FF0D7663D8E13843
+	name = salastro
+[gpg]
+	program = gpg
+[credential]
+	helper = store
+[commit]
+	gpgsign = true
+	verbose = true
+[alias]
+	co = commit
+	p = push
+	pf = push --force
+	s = status
+	cl = clone
+	a = add
+	au = add -u
+	d = diff

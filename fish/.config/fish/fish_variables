@@ -1,0 +1,51 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export BAT_THEME:Nord
+SETUVAR --export BROWSER:zen
+SETUVAR --export EDITOR:nvim
+SETUVAR --export INPUTRC:/home/salastro/\x2econfig/readline/inputrc
+SETUVAR --export LESS_TERMCAP_mb:\x1b\x5b01\x3b31m
+SETUVAR --export LESS_TERMCAP_md:\x1b\x5b01\x3b31m
+SETUVAR --export LESS_TERMCAP_me:\x1b\x5b0m
+SETUVAR --export LESS_TERMCAP_se:\x1b\x5b0m
+SETUVAR --export LESS_TERMCAP_so:\x1b\x5b01\x3b44\x3b33m
+SETUVAR --export LESS_TERMCAP_ue:\x1b\x5b0m
+SETUVAR --export LESS_TERMCAP_us:\x1b\x5b01\x3b32m
+SETUVAR --export TERMINAL:st
+SETUVAR --export WAKATIME_HOME:/home/salastro/\x2ewakatime
+SETUVAR --export XBPS_DISTDIR:/home/salastro/\x2esrcpkgs/void\x2dpackages/
+SETUVAR --export XDG_RUNTIME_DIR:/tmp/runtime\x2dsalastro
+SETUVAR __fish_initialized:3400
+SETUVAR fish_color_autosuggestion:555\x1ebrblack
+SETUVAR fish_color_cancel:\x2dr
+SETUVAR fish_color_command:blue
+SETUVAR fish_color_comment:red
+SETUVAR fish_color_cwd:green
+SETUVAR fish_color_cwd_root:red
+SETUVAR fish_color_end:green
+SETUVAR fish_color_error:brred
+SETUVAR fish_color_escape:brcyan
+SETUVAR fish_color_history_current:\x2d\x2dbold
+SETUVAR fish_color_host:normal
+SETUVAR fish_color_host_remote:yellow
+SETUVAR fish_color_normal:normal
+SETUVAR fish_color_operator:brcyan
+SETUVAR fish_color_param:cyan
+SETUVAR fish_color_quote:yellow
+SETUVAR fish_color_redirection:cyan\x1e\x2d\x2dbold
+SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_status:red
+SETUVAR fish_color_user:brgreen
+SETUVAR fish_color_valid_path:\x2d\x2dunderline
+SETUVAR fish_greeting:\x1d
+SETUVAR fish_key_bindings:fish_vi_key_bindings
+SETUVAR fish_pager_color_completion:normal
+SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
+SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
+SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_user_paths:/home/salastro/\x2espicetify\x1e/home/salastro/\x2elocal/share/npm/bin\x1e/home/salastro/\x2elocal/bin
+SETUVAR --export npm_config_cache:/home/salastro/\x2ecache/npm
+SETUVAR --export npm_config_prefix:/home/salastro/\x2elocal/share/npm
+SETUVAR --export npm_config_userconfig:/home/salastro/\x2econfig/npm/config

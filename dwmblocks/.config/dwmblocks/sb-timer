@@ -1,0 +1,3 @@
+TMPFILE="/tmp/timer.time"
+
+[ -s $TMPFILE ] && printf "[%s" "$(cat $TMPFILE)"

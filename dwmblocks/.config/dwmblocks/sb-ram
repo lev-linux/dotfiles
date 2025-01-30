@@ -1,0 +1,3 @@
+#!/bin/sh
+
+printf "🧠 %.*f%%" 1 $(free | sed -n '2{p;q}' | awk '{printf 100-(($7/$2)*100)}')

@@ -1,0 +1,3 @@
+#!/bin/sh 
+
+xkblayout-state print " %s"

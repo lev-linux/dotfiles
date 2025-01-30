@@ -1,0 +1,3 @@
+[submodule "dwmblocks/.srcpkgs/dwmblocks-async"]
+	path = dwmblocks/.srcpkgs/dwmblocks-async
+	url = https://github.com/lev-linux/dwmblocks.git
