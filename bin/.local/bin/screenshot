@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Default save path
+DIR=~/Pictures/Screenshots
+DATE=$(date +%Y-%m-%d-%H-%M-%S)
+IMAGE_PATH="$DIR/screenshot-$DATE.png"
+mkdir -p ~/Pictures/Screenshots
+
+case $1 in
+	"fullscreen" )
+		maim | tee "$IMAGE_PATH" | xclip -selection clipboard -t image/png
+		;;
+	"focus" )
+		maim -i $(xdotool getactivewindow) | tee "$IMAGE_PATH" | xclip -selection clipboard -t image/png
+		;;
+	"select" )
+		maim -sBu -r crossboxzoom -D | tee "$IMAGE_PATH" | xclip -selection clipboard -t image/png
+		;;
+	* )
+		echo "Usage: screenshot [fullscreen|focus|select]"
+		exit 1
+		;;
+esac
+
+success=${PIPESTATUS[0]}
+
+if [ $success -eq 0 ]; then
+	notify-send "maim" "Screenshot $1 saved"
+else
+	rm "$IMAGE_PATH"
+	notify-send "maim" "Screenshot $1 canceled"
+fi

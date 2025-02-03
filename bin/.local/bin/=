@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Path to menu application
+if [[ -n $(command -v dmenu) ]]; then
+    menu="$(command -v dmenu)"
+else
+    echo >&2 "Rofi or dmenu not found"
+    exit
+fi
+
+answer=$(echo "$@" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//')
+
+action=$(echo -e "Copy\nDel\nX" |
+$menu -i -p "= $answer")
+
+case $action in
+    "Del") $0 ;;
+    "Copy") echo -n "$answer" | xclip -selection c ;;
+    "X") ;;
+    "") ;;
+    *) $0 "$answer $action" ;;
+esac
+

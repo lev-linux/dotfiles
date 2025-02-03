@@ -1,0 +1,11 @@
+#!/bin/sh
+
+case $1 in
+	"raise")  pactl set-sink-volume @DEFAULT_SINK@ +5% ;;
+	"lower")  pactl set-sink-volume @DEFAULT_SINK@ -5% ;;
+	"toggle") pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+	"toggle-mic") pactl set-source-mute @DEFAULT_SOURCE@ toggle ;;
+esac
+
+# Refresh dwmblocks
+pkill -RTMIN+1 dwmblocks

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+TMPFILE="/tmp/timer.time"
+
+_notify_me() {
+	notify-send "termdwon" "Time is up"
+}
+_start_timer() {
+	[ -z $1 ] && task=$(printf|dmenu)
+	[ "$task" ] && timew start $task
+	termdown $1 -o $TMPFILE --exec-cmd "pkill -RTMIN+4 dwmblocks" && _notify_me
+	rm -f $TMPFILE
+	pkill -RTMIN+4 dwmblocks 
+}
+_stop_timer() {
+	timew stop
+	head -n1 $TMPFILE | xclip -selection clipboard
+	pkill termdown && notify-send "Stopped timer"
+}
+
+case $1 in
+	"stop") _stop_timer ;;
+	*) _start_timer $1 ;;
+esac

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Check if script is running in a terminal
+if [ -t 0 ]; then
+    # Terminal mode - use enhanced fzf
+    script=$(find ~/.local/bin/ -type f -executable | fzf \
+        --prompt="🔍 Select script: " \
+        --reverse \
+        --border=rounded \
+        --info=inline \
+        --preview='bat --style=numbers --color=always --theme="gruvbox-dark" {}' \
+        --preview-window=right:50%:wrap \
+        --color='fg:252,fg+:white,bg+:237,hl:84,hl+:84,info:144,border:240' \
+        --pointer='▶' \
+        --marker='✓' \
+        --bind='ctrl-/:toggle-preview' \
+        --bind='ctrl-space:toggle-preview-wrap')
+else
+    # GUI mode - use dmenu
+    script=$(find ~/.local/bin/ -type f -executable | dmenu -i -l 10 -p "Select script:")
+fi
+
+# Execute the selected script if one was chosen
+[ -n "$script" ] && "$script"

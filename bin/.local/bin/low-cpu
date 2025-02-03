@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# the first argument is the mode and the second is the value
+
+# limit function to change the value of the max inte cpu power
+_limit() {
+	# check if the value is between 15 and 100 
+	if [ "$1" -ge 15 ] && [ "$1" -le 100 ]
+	then
+		# if the statement is true change the value of the max intel cpu power
+		echo $1 > /sys/devices/system/cpu/intel_pstate/max_perf_pct
+	else
+		# if the statement is not true print "Wrong value"
+		echo "Wrong value"
+	fi
+}
+
+# turbo function to change the value of the intel cpu turbo state (no_turbo file)
+_turbo() {
+	case $1 in
+		# turn on turbo cpu
+		"on") echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo ;;
+		# turn off turbo cpu
+		"off") echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo ;;
+		# wrong value if not on/off
+		*) echo "Wrong value"
+	esac
+}
+
+# get the turbo state in human language based on the no_turbo file
+_getTurboState() {
+	turbo_state=$(cat /sys/devices/system/cpu/intel_pstate/no_turbo)
+	case $turbo_state in
+		"1") echo "off" ;;
+		"0") echo "on" ;;
+	esac
+}
+
+# print a cpu related file
+_print() {
+	case $1 in
+		# print the intel_pstate/max_perf_pct file
+		"limit") cat /sys/devices/system/cpu/intel_pstate/max_perf_pct ;;
+		# print the turbo state
+		"turbo") _getTurboState ;;
+		# if value not defined print "Not a something to print" 
+		*) echo "Not a something to print" ;;
+	esac
+}
+
+case $1 in
+	# if the mode is "limit" use the value with _limit function
+	"limit") _limit $2 ;;
+	# if the mode is "turbo" use the value with _turbo function
+	"turbo") _turbo $2 ;;
+	# if the mode is "print" use the value with _print function
+	"print") _print $2 ;;
+	# if the mode is not defined print "Not a mode"
+	*) echo "Not a mode" ;;
+esac

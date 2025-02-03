@@ -1,0 +1,31 @@
+#!/bin/sh 
+
+res=$(echo "360\n720\nother" | dmenu)
+vid=$(xclip -o -selection clipboard)
+name=$(youtube-dl --get-filename "$vid")
+dir="$HOME/Videos"
+path="$dir/$name"
+
+_ytdl18() {
+	youtube-dl -f 18 -o "$path" $vid &
+	sleep 1
+	mpv "$path.part"
+}
+
+_ytdl22() {
+	youtube-dl -f 22 -o "$path" $vid &
+	sleep 1
+	mpv "$path.part"
+}
+
+_ytdlOther() {
+	youtube-dl -o "$path" $vid &
+	sleep 1
+	mpv "$path.part"
+}
+
+case $res in
+	"360") _ytdl18 ;;
+	"720") _ytdl22 ;;
+	"other") _ytdlOther ;;
+esac

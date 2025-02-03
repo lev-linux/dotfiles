@@ -1,0 +1,6 @@
+#!/bin/sh 
+
+bgcolor=$(sed -n 1p ~/.cache/wal/colors)
+fgcolor=$(sed -n 2p ~/.cache/wal/colors)
+
+sent -b "$bgcolor" -c "$fgcolor" $@

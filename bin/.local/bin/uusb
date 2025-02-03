@@ -1,0 +1,6 @@
+#!/bin/sh 
+
+chosen=$(lsblk -lp | grep '[part\|disk] */media/' | awk '{print $1, "(" $4 ")"}' | dmenu | awk '{print $1}')
+
+
+udevil umount $chosen && notify-send "udevil" "$chosen unmounted" || notify-send "udevil" "Error while umounting $chosen"

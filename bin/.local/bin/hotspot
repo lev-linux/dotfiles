@@ -1,0 +1,1 @@
+pgrep create_ap && doas pkill create_ap && pkill -RTMIN+3 dwmblocks || doas create_ap --daemon wlo1 wlo1 "Are you aproaching me?" "I can't beat the shit out of you without getting closer"

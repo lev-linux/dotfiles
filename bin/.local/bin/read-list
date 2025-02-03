@@ -1,0 +1,13 @@
+#!/bin/sh
+
+FILE_PATH="$HOME/Documents/Notes/Lists/Read-list.txt"
+
+if [ ${#} -eq 0 ]; then
+    if [ -p "/dev/stdin" ]; then
+        (cat; printf "\n\n") >> "$FILE_PATH"
+    else
+        eval "$EDITOR" "$FILE_PATH"
+    fi
+else
+    printf "%s\n\n" "${*}" >> "$FILE_PATH"
+fi

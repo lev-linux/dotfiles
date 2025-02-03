@@ -1,0 +1,11 @@
+#!/bin/sh
+
+PIDFILE="/tmp/screenkey.pid"
+
+if [ -s $PIDFILE ]
+then
+	kill $(cat $PIDFILE)
+	rm $PIDFILE
+else
+	screenkey & echo $! > $PIDFILE
+fi

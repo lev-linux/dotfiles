@@ -1,0 +1,8 @@
+#!/bin/sh 
+
+camera=$(ls /dev/video* | dmenu -p "Choose camera")
+declare -a PID
+
+mpv av://v4l2:$camera --profile=low-latency --untimed --geometry=257x145+100%+0% --keepaspect-window --no-osc & PID=$!
+sleep 1.8
+xdo move -x 1103 -y 19 -p $PID

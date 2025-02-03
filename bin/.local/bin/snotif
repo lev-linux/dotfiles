@@ -1,0 +1,70 @@
+#!/bin/sh
+# Show tiramisu notifications in dwmblocks.
+
+# Notification history file
+hist_file="$HOME/.cache/notifs.history"
+# Notification temporary file
+tmp_file="/tmp/notifs.fifo"
+
+# Default notification duration
+display_duration=5.0
+
+# Maximum number of characters
+char_limit=45
+
+# Formatting separator
+sep=';'
+
+# Notification sound bell
+sound="/home/salahdin/Music/Notifications/pristine.mp3"
+
+# Create history and temporary files
+touch $hist_file 
+touch $tmp_file 
+
+_daemon() {
+	# Stop old tiramisu processes if any:
+	pgrep -x tiramisu >/dev/null && killall tiramisu
+
+	# Start a new tiramisu process:
+	setsid tiramisu -o "[#source|#summary:#body$sep#timeout$sep#icon$sep#id$sep#actions$sep#hints" |
+	    while read -r line; do
+
+		# Echo notification into history file
+		echo "$line]" >> $hist_file
+
+		# Declare notification text and timeout values
+		notif=$(echo $line | awk -F"$sep" '{print $1}')
+		timeout=$(echo $line | awk -F"$sep" '{print $2}')
+
+		# Cut notification by character limit:
+		if [ "${#notif}" -gt "$char_limit" ]; then
+		    notif="$(echo "$notif" | cut -c1-$((char_limit-1)))…"
+		fi
+
+		# Echo the Notification into temporary file and send dwmblock signal
+		printf "$notif" > $tmp_file && pkill -RTMIN+8 dwmblocks && mpv $sound
+
+		# If there is no timeout set, use the default one
+		if [ "$timeout" -eq "-1" ]
+		then
+			sleep "$display_duration"
+		else
+			sleep "$timeout" 
+		fi
+		
+		# Clear the temporary file and update dwmblock
+		printf "" > $tmp_file && pkill -RTMIN+8 dwmblocks
+	done &
+}
+
+_clear() {
+	# Kill previous processes and clear the tmp file and restart the daemon
+	pgrep -x tiramisu >/dev/null && printf "" > $tmp_file && \
+	pkill -RTMIN+8 dwmblocks && _daemon
+}
+
+case $1 in 
+	"daemon") _daemon ;;
+	"clear") _clear ;;
+esac 

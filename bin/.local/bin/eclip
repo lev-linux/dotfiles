@@ -1,0 +1,5 @@
+#!/bin/sh 
+
+tmp=$(mktemp --suffix="$1")
+$EDITOR "$tmp"
+cat "$tmp" | xclip -selection clipboard

@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# Courses directory
+SEMESTER="$HOME/Documents/ZC/Academia/Fall24"
+if [ ! -d "$SEMESTER" ]; then
+  echo "Error: Directory $SEMESTER does not exist."
+  exit 1
+fi
+
+# Select a course
+COURSE=$(ls -d "$SEMESTER"/*/ | xargs -n 1 basename | dmenu -i -p "Course")
+if [ -z "$COURSE" ]; then
+  echo "No course selected."
+  exit 1
+fi
+
+# Create a notes folder for the selected course
+NOTES_DIR="$SEMESTER/$COURSE/notes"
+mkdir -p "$NOTES_DIR"
+
+# Choose whether it's a lecture, tutorial, assignment, or other type of note
+TYPE=$(echo "Lecture\nTutorial\nAssignment\nOther" | dmenu -i -p "Type")
+if [ -z "$TYPE" ]; then
+  echo "No note type selected."
+  exit 1
+fi
+
+# Normalize TYPE to a short code
+case "$TYPE" in
+  "Lecture") TYPE_CODE="lect" ;;
+  "Tutorial") TYPE_CODE="tute" ;;
+  "Assignment") TYPE_CODE="asgmt" ;;
+  "Other") TYPE_CODE="other" ;;
+  *) TYPE_CODE="$TYPE" ;;
+esac
+
+# Create a subdirectory for the selected note type
+TYPE_DIR="$NOTES_DIR/$TYPE_CODE"
+mkdir -p "$TYPE_DIR"
+
+# List existing labels in the notes directory or create a new label
+LABEL=$(ls "$TYPE_DIR"/*.xopp 2>/dev/null | sed "s|.*/||; s/\.xopp$//" | dmenu -i -p "Label")
+if [ -z "$LABEL" ]; then
+  LABEL=$(date +%d%m%y)
+fi
+
+FILE="$TYPE_DIR/${LABEL}.xopp"
+
+# Open the file with Xournal++
+xournalpp "$FILE"

@@ -1,0 +1,10 @@
+#!/bin/sh 
+
+vid=$(xclip -o -selection clipboard)
+name=$(youtube-dl --get-filename "$vid")
+dir="$HOME/Videos"
+# path="$dir/$name"
+
+cd $dir
+youtube-dl --write-description --skip-download "$vid"
+mpv "$vid" --stream-record="$name"

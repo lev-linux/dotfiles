@@ -1,0 +1,7 @@
+#!/bin/sh
+
+[ "$1" = "up" ] && brillo -A $2 && brillo -O
+[ "$1" = "down" ] && brillo -U $2 && brillo -O
+[ "$1" = "set" ] && brillo -S $2 && brillo -O
+
+pkill -RTMIN+6 dwmblocks

@@ -1,0 +1,5 @@
+#!/bin/sh 
+
+chosen=$(lsblk -lp | grep '[part\|disk] $' | awk '{print $1, "(" $4 ")"}' | dmenu | awk '{print $1}')
+
+udevil mount $chosen && notify-send "udevil" "$chosen mounted on /media" || notify-send "udevil" "Error while mounting $chosen"
