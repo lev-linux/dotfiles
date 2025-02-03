@@ -39,6 +39,9 @@ super + ctrl + b
 super + equal
 	=
 
+XF86Calculator
+	=
+
 super + L
     xset s activate
 
