@@ -1,0 +1,11 @@
+# Run backup every 9 hours
+0 */9 * * * backup.sh
+
+# # Update discord every day at 12 PM
+# 0 12 * * * ~/.config/cron/scripts/update-discord.sh
+
+# Check if battery is low for hibernation every minute
+* * * * * ~/.config/cron/scripts/bat.sh
+
+# # Media inihibit dpms every minute
+# */5 * * * * ~/.config/cron/scripts/media-dpms-inhibitor.sh
