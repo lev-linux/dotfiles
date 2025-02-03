@@ -1,0 +1,2 @@
+#!/bin/sh
+exec kmonad ~/.config/kmonad.kbd
