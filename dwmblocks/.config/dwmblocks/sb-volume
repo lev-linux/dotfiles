@@ -1,16 +1,27 @@
 #!/bin/sh
 
 # Get speaker mute and volume status
-mute=$(pulsemixer --get-mute)
-case $mute in
-    "0" ) 
-        mute="🔊 " 
-        vol="$(pulsemixer --get-volume | awk '{print $1}')%" 
-        ;;
-    "1" ) 
-        mute="🔇" 
-        vol="" 
-        ;;
-esac
+sink_muted=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+sink_volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1 {print $5}')
 
-echo "$mute$vol"
+# Get microphone mute status
+mic_muted=$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')
+
+# Format output for speakers
+if [ "$sink_muted" = "yes" ]; then
+    speaker_status="🔇"
+    vol=""
+else
+    speaker_status="🔊 "
+    vol="$sink_volume"
+fi
+
+# Format output for microphone
+if [ "$mic_muted" = "yes" ]; then
+    mic_status="❌"
+else
+    mic_status="🎤"
+fi
+
+# Print status for dwmblocks
+echo "$mic_status $speaker_status$vol"
