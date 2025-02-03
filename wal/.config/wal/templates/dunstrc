@@ -1,0 +1,42 @@
+[global]
+    # Notification
+    separator_height = 3
+    padding = 24
+    frame_width = 3
+
+    # How long a user needs to be idle for sticky notifications
+    idle_threshold = 120
+
+    # Font and typography settings
+    font = Fira Mono 11
+    alignment = center
+    word_wrap = yes
+
+    # Format for how notifications will be displayed
+    # Usage: `notify-send 'Title' 'Summary'`
+    format = "<b>%s</b> %b"
+
+    # Allow some HTML tags like <i> and <u> in notifications
+    markup = full
+
+# Set the background and foreground (text) color for all notifications
+[urgency_low]
+    background = "{background}d9"
+    foreground = "{foreground}"
+    frame_color = "{color4}"
+
+[urgency_normal]
+    background = "{background}d9"
+    foreground = "{foreground}"
+    frame_color = "{color4}"
+
+[urgency_critical]
+    background = "{background}d9"
+    foreground = "{foreground}"
+    frame_color = "{color4}"
+
+[play_sound]
+    summary = "*"
+    script = "play_notification_sound.sh"
+
+# vim ft=dosini
