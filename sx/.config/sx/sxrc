@@ -5,8 +5,8 @@ exec >/dev/null 2>&1
 # xrandr --auto
 xrandr --dpi 96
 
-syncthing --no-browser &
-kmonad ~/.config/kmonad.kbd &
+# syncthing --no-browser &
+# kmonad ~/.config/kmonad.kbd &
 scrond -f ~/.config/cron/crontab
 
 exec dbus-run-session -- dwm
