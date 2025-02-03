@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export BAT_THEME:Nord
+SETUVAR --export BAT_THEME:gruvbox\x2ddark
 SETUVAR --export BROWSER:zen
 SETUVAR --export EDITOR:nvim
 SETUVAR --export INPUTRC:/home/salastro/\x2econfig/readline/inputrc
@@ -11,6 +11,7 @@ SETUVAR --export LESS_TERMCAP_se:\x1b\x5b0m
 SETUVAR --export LESS_TERMCAP_so:\x1b\x5b01\x3b44\x3b33m
 SETUVAR --export LESS_TERMCAP_ue:\x1b\x5b0m
 SETUVAR --export LESS_TERMCAP_us:\x1b\x5b01\x3b32m
+SETUVAR --export SVDIR:/home/salastro/\x2econfig/service/
 SETUVAR --export TERMINAL:st
 SETUVAR --export WAKATIME_HOME:/home/salastro/\x2ewakatime
 SETUVAR --export XBPS_DISTDIR:/home/salastro/\x2esrcpkgs/void\x2dpackages/

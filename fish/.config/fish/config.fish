@@ -1,11 +1,6 @@
-fish_add_path ~/.local/bin
-fish_add_path ~/.local/share/npm/bin
-
-set -Ux WAKATIME_HOME ~/.wakatime
-set -Ux XDG_RUNTIME_DIR /tmp/runtime-$USER
-set -Ux npm_config_cache ~/.cache/npm
-set -Ux npm_config_prefix ~/.local/share/npm
-set -Ux npm_config_userconfig ~/.config/npm/config
+source ~/.config/fish/path.fish
+source ~/.config/fish/export.fish
+source ~/.config/fish/secrets.fish # Source keys and secrets, not in git
 
 if status is-interactive
 	source ~/.config/aliasrc
@@ -33,7 +28,6 @@ if status is-interactive
 end
 
 if status is-login
+	neofetch
 	pgrep Xorg || sx
 end
-
-fish_add_path /home/salastro/.spicetify
