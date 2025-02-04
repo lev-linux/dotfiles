@@ -4,3 +4,6 @@
 [submodule "xbps-src/dot-srcpkgs/void-packages"]
 	path = xbps-src/dot-srcpkgs/void-packages
 	url = git@github.com:void-linux/void-packages.git
+[submodule "dwm/dot-srcpkgs/dwm"]
+	path = dwm/dot-srcpkgs/dwm
+	url = https://github.com/salastro/dwm
