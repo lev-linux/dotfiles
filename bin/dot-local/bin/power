@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Define power options
+options="Off\nReboot\nSleep\nHibernate\nX"
+
+# Check if script is running in a terminal
+if [ -t 0 ]; then
+    # Terminal mode - use fzf
+    choice=$(echo -e "$options" | fzf \
+        --prompt="⚡ Select power option: " \
+				--height=~100% \
+        --info=inline \
+        --color='fg:252,fg+:white,bg+:237,hl:84,hl+:84,info:144,border:240' \
+        --pointer='▶' \
+        --marker='✓' \
+        --no-preview \
+        --reverse)
+else
+    # GUI mode - use dmenu
+    choice=$(echo -e "$options" | dmenu "$@" -p "Power")
+fi
+
+# Handle the selection
+case $choice in
+    Off) doas poweroff ;;
+    Reboot) doas reboot ;;
+    Sleep)
+        xset s activate
+        doas zzz
+        ;;
+    Hibernate)
+        xset s activate
+        doas ZZZ
+        ;;
+esac

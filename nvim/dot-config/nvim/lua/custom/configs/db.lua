@@ -1,0 +1,45 @@
+require("dashboard").setup {
+  change_to_vcs_root = true,
+  shortcut_type = "number",
+  theme = "hyper",
+  config = {
+    header = {
+      "",
+      "           ▄ ▄                   ",
+      "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
+      "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
+      "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
+      "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
+      "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
+      "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
+      "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
+      "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+      "",
+      "",
+    },
+    shortcut = {
+      {
+        icon = "󰊳 ",
+        desc = "Update",
+        group = "@property",
+        action = "Lazy update",
+        key = "u",
+      },
+      {
+        icon = "󰈚 ",
+        -- icon_hl = "@variable",
+        desc = "Files",
+        group = "Label",
+        action = "Telescope find_files",
+        key = "f",
+      },
+      {
+        icon = " ",
+        desc = "Bookmarks",
+        group = "Number",
+        action = "Telescope marks",
+        key = "m",
+      },
+    },
+  },
+}

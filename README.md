@@ -23,14 +23,14 @@ cd ~/.dotfiles
 To create symlinks for a specific program, use:
 
 ```sh
-stow <package>
+stow --dotfiles <package>
 ```
 
 For example, to apply the configurations for `dwm` and `zsh`, run:
 
 ```sh
-stow dwm
-stow zsh
+stow --dotfiles dwm
+stow --dotfiles zsh
 ```
 
 This will create symlinks in your home directory (`~`), pointing to the corresponding files in `~/.dotfiles/dwm/` and `~/.dotfiles/zsh/`.
@@ -38,7 +38,7 @@ This will create symlinks in your home directory (`~`), pointing to the correspo
 If you need to overwrite existing files, use:
 
 ```sh
-stow -D <package>
+stow --dotfiles -R <package>
 ```
 
 before restowing to remove old symlinks.
@@ -66,7 +66,7 @@ To update a configuration, modify the files inside `~/.dotfiles/<package>/`, the
 To remove symlinks for a specific package, use:
 
 ```sh
-stow -D <package>
+stow --dotfiles -D <package>
 ```
 
 ## Customization

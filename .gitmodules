@@ -1,6 +1,6 @@
-[submodule "dwmblocks/.srcpkgs/dwmblocks-async"]
-	path = dwmblocks/.srcpkgs/dwmblocks-async
+[submodule "dwmblocks/dot-srcpkgs/dwmblocks-async"]
+	path = dwmblocks/dot-srcpkgs/dwmblocks-async
 	url = https://github.com/lev-linux/dwmblocks.git
-[submodule "xbps-src/.srcpkgs/void-packages"]
-	path = xbps-src/.srcpkgs/void-packages
+[submodule "xbps-src/dot-srcpkgs/void-packages"]
+	path = xbps-src/dot-srcpkgs/void-packages
 	url = git@github.com:void-linux/void-packages.git
