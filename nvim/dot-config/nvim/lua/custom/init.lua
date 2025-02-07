@@ -21,13 +21,36 @@ autocmd("VimResized", { -- Resize splits
 })
 
 -- Sudo Write
-vim.cmd [[
-  command! W execute 'w !doas tee % > /dev/null' | edit!
-  command! Wq execute 'w !doas tee % > /dev/null' | quit
-  command! WQ execute 'w !doas tee % > /dev/null' | quit
-  command! Wqa execute 'w !doas tee % > /dev/null' | qall
-  command! WQa execute 'w !doas tee % > /dev/null' | qall
-]]
+local sudo = vim.fn.executable("doas") == 1 and "doas" or (vim.fn.executable("sudo") == 1 and "sudo" or nil)
+
+if sudo then
+  local function sudo_write()
+    vim.cmd(string.format("write !%s tee %s > /dev/null", sudo, vim.fn.expand("%")))
+    vim.cmd("edit!")
+  end
+
+  vim.api.nvim_create_user_command("W", sudo_write, {})
+
+  vim.api.nvim_create_user_command("Wq", function()
+    sudo_write()
+    vim.cmd("quit")
+  end, {})
+
+  vim.api.nvim_create_user_command("WQ", function()
+    sudo_write()
+    vim.cmd("quit")
+  end, {})
+
+  vim.api.nvim_create_user_command("Wqa", function()
+    sudo_write()
+    vim.cmd("qall")
+  end, {})
+
+  vim.api.nvim_create_user_command("WQa", function()
+    sudo_write()
+    vim.cmd("qall")
+  end, {})
+end
 
 -- Load custom settings
 require "custom.functions"
