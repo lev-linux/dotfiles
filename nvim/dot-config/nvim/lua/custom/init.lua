@@ -22,12 +22,11 @@ autocmd("VimResized", { -- Resize splits
 
 -- Sudo Write
 vim.cmd [[
-  command! W w !doas tee % > /dev/null
-  command! Wq wq !doas tee % > /dev/null
-  command! Wq wq !doas tee % > /dev/null
-  command! WQ wq !doas tee % > /dev/null
-  command! Wqa wqa !doas tee % > /dev/null
-  command! WQa wqa !doas tee % > /dev/null
+  command! W execute 'w !doas tee % > /dev/null' | edit!
+  command! Wq execute 'w !doas tee % > /dev/null' | quit
+  command! WQ execute 'w !doas tee % > /dev/null' | quit
+  command! Wqa execute 'w !doas tee % > /dev/null' | qall
+  command! WQa execute 'w !doas tee % > /dev/null' | qall
 ]]
 
 -- Load custom settings
