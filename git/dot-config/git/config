@@ -18,3 +18,5 @@
 	a = add
 	au = add -u
 	d = diff
+[rebase]
+	keepCommits = true
