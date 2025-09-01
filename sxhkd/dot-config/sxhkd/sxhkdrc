@@ -24,17 +24,29 @@ super + e
 super + d
 	dmenu_run
 
+super + q
+	powermenu
+
 super + P
 	passmenu
+
+super + ctrl + P
+	passmenu --otp
 
 super + p
 	arandr
 
 super + ctrl + w
-	netmenu
+	netmenu -i -W 550
 
 super + ctrl + b
-	bluemenu -W 850 -l 20
+	bluemenu -i -W 450 -l 20
+
+super + ctrl + i
+	bkmrkmenu
+
+super + period
+	emojimenu
 
 super + equal
 	=
@@ -49,7 +61,10 @@ super + w
 	$BROWSER
 
 super + control + c
-	clipmenu
+	clipmenu -W 1000 -l 15
+
+super + ctrl + d
+	darkman toggle
 
 ## Brightness
 {XF86MonBrightnessUp,XF86MonBrightnessDown}
@@ -105,3 +120,9 @@ ctrl + shift + space
 
 ctrl + grave
 	dunstctl history-pop
+
+ctrl + shift + space
+	dunstctl context
+
+alt + space
+	pkill -RTMIN+7 dwmblocks
