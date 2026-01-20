@@ -6,18 +6,18 @@
   <property name="pressureMultiplier" value="1"/>
   <property name="zoomGesturesEnabled" value="true"/>
   <property name="selectedToolbar" value="Xournal++"/>
-  <property name="lastSavePath" value="/home/salastro/Documents/ZC/Academia/Fall24/CIE327/notes/asgmt"/>
-  <property name="lastOpenPath" value="/home/salastro/Documents/ZC/Academia/Fall24/CIE328/asgmt"/>
+  <property name="lastSavePath" value="/home/salastro/Documents/ZC/Academia/Fall25/CIE337/notes/asgmt"/>
+  <property name="lastOpenPath" value="/home/salastro/Downloads"/>
   <property name="lastImagePath" value=""/>
-  <property name="edgePanSpeed" value="20"/>
+  <property name="edgePanSpeed" value="14"/>
   <property name="edgePanMaxMult" value="5"/>
   <property name="zoomStep" value="10"/>
   <property name="zoomStepScroll" value="2"/>
   <property name="displayDpi" value="72"/>
-  <property name="mainWndWidth" value="1920"/>
-  <property name="mainWndHeight" value="1038"/>
+  <property name="mainWndWidth" value="1050"/>
+  <property name="mainWndHeight" value="1032"/>
   <property name="maximized" value="false"/>
-  <property name="showToolbar" value="false"/>
+  <property name="showToolbar" value="true"/>
   <property name="showSidebar" value="false"/>
   <property name="sidebarWidth" value="50"/>
   <property name="sidebarNumberingStyle" value="1"/>
@@ -63,7 +63,7 @@
   <property name="autoloadMostRecent" value="false"/>
   <property name="autoloadPdfXoj" value="true"/>
   <property name="defaultSaveName" value="%F-Note-%H-%M"/>
-  <property name="defaultPdfExportName" value="%{name}_annotated"/>
+  <property name="defaultPdfExportName" value="%{name}"/>
   <property name="autosaveEnabled" value="true"/>
   <property name="autosaveTimeout" value="3"/>
   <property name="addHorizontalSpace" value="false"/>
@@ -189,8 +189,20 @@
       <attribute name="deviceSource" type="int" value="1"/>
     </data>
   </data>
+  <data name="lastUsedPageBgColor">
+    <attribute name="color00" type="hex" value="ff000000"/>
+    <attribute name="color01" type="hex" value="ffffffff"/>
+    <attribute name="color02" type="hex" value="ffffffff"/>
+    <attribute name="color03" type="hex" value="ffffffff"/>
+    <attribute name="color04" type="hex" value="ffffffff"/>
+    <attribute name="color05" type="hex" value="ffffffff"/>
+    <attribute name="color06" type="hex" value="ffffffff"/>
+    <attribute name="color07" type="hex" value="ffffffff"/>
+    <attribute name="color08" type="hex" value="ffffffff"/>
+    <attribute name="count" type="int" value="9"/>
+  </data>
   <data name="tools">
-    <attribute name="current" type="string" value="selectPdfTextRect"/>
+    <attribute name="current" type="string" value="pen"/>
     <data name="drawArrow">
       <attribute name="drawingType" type="string" value="default"/>
     </data>
@@ -211,14 +223,14 @@
     </data>
     <data name="eraser">
       <attribute name="drawingType" type="string" value="strokeRecognizer"/>
-      <attribute name="size" type="string" value="BIG"/>
+      <attribute name="size" type="string" value="MEDIUM"/>
       <attribute name="type" type="string" value="deleteStroke"/>
     </data>
     <data name="hand">
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="highlighter">
-      <attribute name="color" type="hex" value="ff0000"/>
+      <attribute name="color" type="hex" value="000000"/>
       <attribute name="drawingType" type="string" value="strokeRecognizer"/>
       <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="128"/>
