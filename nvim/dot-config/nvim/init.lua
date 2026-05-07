@@ -149,75 +149,6 @@ require("lazy").setup({
   },
   spec = {
     {
-      "nvimdev/dashboard-nvim",
-      dependencies = { { "nvim-tree/nvim-web-devicons" } },
-      event = "VimEnter",
-      priority = 1000,
-      config = function()
-        require("dashboard").setup {
-          change_to_vcs_root = true,
-          shortcut_type = "number",
-          theme = "hyper",
-          config = {
-            header = {
-              "",
-              "           ▄ ▄                   ",
-              "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-              "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-              "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-              "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-              "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-              "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-              "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-              "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
-              "",
-              "",
-            },
-            shortcut = {
-              {
-                icon = "󰊳 ",
-                desc = "Update",
-                group = "@property",
-                action = "Lazy update",
-                key = "u",
-              },
-              {
-                icon = "󰈚 ",
-                -- icon_hl = "@variable",
-                desc = "Files",
-                group = "Label",
-                action = "Telescope find_files",
-                key = "f",
-              },
-              {
-                icon = " ",
-                desc = "Bookmarks",
-                group = "Number",
-                action = "Telescope marks",
-                key = "m",
-              },
-              {
-                desc = " New file",
-                key = "n",
-                action = "enew"
-              },
-            },
-            footer = function()
-              local version = vim.version()
-              local nvim_version = string.format("v%d.%d.%d", version.major,
-                version.minor, version.patch)
-
-              return {
-                "",
-                " " .. nvim_version
-              }
-            end
-            ,
-          },
-        }
-      end,
-    },
-    {
       "SirVer/ultisnips",
       event = "InsertEnter",
       dependencies = {
@@ -434,7 +365,6 @@ require("lazy").setup({
             lmap("n", "<leader>lf", function() vim.diagnostic.open_float { border = "rounded" } end, "Line diagnostics")
             lmap("n", "<leader>q", vim.diagnostic.setloclist, "Diagnostics to loclist")
             lmap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
-            lmap("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
             lmap("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
               "List workspace folders")
             lmap("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, "Prev diagnostic")
@@ -461,6 +391,20 @@ require("lazy").setup({
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = false, underline = true, sp = "orange" })
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = false, underline = true, sp = "LightBlue" })
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = false, underline = true, sp = "LightGreen" })
+
+        vim.lsp.config["arduino_language_server"] = {
+          cmd = {
+            "arduino-language-server",
+            "-cli-config",
+            "/home/salastro/.arduino15/arduino-cli.yaml",
+            "-cli",
+            "arduino-cli",
+            "-clangd", "clangd",
+            "-fqbn",
+            "esp32:esp32:esp32",
+          },
+          root_dir = vim.loop.cwd(), -- or a function that returns the sketch root
+        }
 
         vim.lsp.config["lua_ls"] = {
           cmd = { "lua-language-server" },
@@ -559,14 +503,14 @@ require("lazy").setup({
         { "<leader>ct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
       },
       opts = {
-        model = "claude-opus-4.5",
+        model = "auto",
         temperature = 0.1,
         auto_insert_mode = true,
         window = {
           layout = "vertical",
           width = 0.45,
         },
-        sticky = { "$claude-opus-4.5", "#buffer:listed", "#glob", "#selection", },
+        sticky = { "$auto", "#buffer:listed", "#glob", "#selection", },
       },
     },
     {
@@ -885,7 +829,7 @@ require("lazy").setup({
       },
     },
     {
-      "tpope/vim-eunuch",
+      "salastro/vim-eunuch-doas",
       cmd = {
         "Rename",
         "Move",
@@ -894,7 +838,11 @@ require("lazy").setup({
         "Mkdir",
         "SudoWrite",
         "SudoEdit",
+        "DoasWrite",
       },
+      init = function()
+        vim.g.eunuch_use_doas = true
+      end,
     },
     {
       "kevinhwang91/nvim-bqf",
@@ -969,6 +917,10 @@ require("lazy").setup({
       end,
     },
     {
+      "wakatime/vim-wakatime",
+      lazy = false,
+    },
+    {
       "akinsho/toggleterm.nvim",
       version = "*",
       keys = {
@@ -996,18 +948,183 @@ require("lazy").setup({
         },
       },
       config = function()
-        require("toggleterm").setup({})
+        require("toggleterm").setup({
+          size = function(term)
+            if term.direction == "horizontal" then
+              return 15
+            elseif term.direction == "vertical" then
+              return vim.o.columns * 0.4
+            end
+          end,
+        })
 
         -- Horizontal terminal
-        vim.keymap.set({ "n", "t" }, "<A-h>", function()
+        map({ "n", "t" }, "<A-h>", function()
           require("toggleterm").toggle(1, nil, nil, "horizontal")
         end, { desc = "Toggle horizontal terminal" })
 
         -- Vertical terminal
-        vim.keymap.set({ "n", "t" }, "<A-v>", function()
+        map({ "n", "t" }, "<A-v>", function()
           require("toggleterm").toggle(2, nil, nil, "vertical")
         end, { desc = "Toggle vertical terminal" })
       end,
-    }
+    },
+
+    -------------------------
+    --  Jupyter Notebooks  --
+    -------------------------
+    {
+      "benlubas/molten-nvim",
+      version = "^1.0.0",
+      build = ":UpdateRemotePlugins",
+      dependencies = {
+        {
+          "3rd/image.nvim",
+          build = false,      -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+          opts = {
+            backend = "ueberzug", -- or "kitty" or "sixel"
+            processor = "magick_cli",
+          }
+        },
+      },
+      ft = { "python" },
+      config = function()
+        -- Molten options
+        vim.g.molten_auto_open_output = false
+        vim.g.molten_image_provider = "image.nvim"
+        vim.g.molten_wrap_output = true
+        vim.g.molten_virt_text_output = true
+        vim.g.molten_virt_text_truncate = "bottom"
+
+        local map = vim.keymap.set
+
+        -- Buffer-local keymaps
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = "python",
+          callback = function(ev)
+            local opts = { buffer = ev.buf, silent = true }
+
+            vim.cmd("MoltenInit python3")
+            -- Kernel
+            map("n", "<leader>mk", "<cmd>MoltenInit<cr>", vim.tbl_extend("force", opts, { desc = "Molten init kernel" }))
+            map("n", "<leader>mK", "<cmd>MoltenRestart<cr>",
+              vim.tbl_extend("force", opts, { desc = "Molten restart kernel" }))
+            map("n", "<leader>mq", "<cmd>MoltenShutdown<cr>",
+              vim.tbl_extend("force", opts, { desc = "Molten shutdown kernel" }))
+
+            -- Execution
+            map("n", "<leader>mr", "<cmd>MoltenEvaluateOperator<cr>",
+              vim.tbl_extend("force", opts, { desc = "Run operator" }))
+            map("n", "<leader>ml", "<cmd>MoltenEvaluateLine<cr>", vim.tbl_extend("force", opts, { desc = "Run line" }))
+            map("v", "<leader>mv", "<cmd>MoltenEvaluateVisual<cr>",
+              vim.tbl_extend("force", opts, { desc = "Run selection" }))
+
+            -- Output
+            map("n", "<leader>mo", "<cmd>MoltenOpenOutput<cr>", vim.tbl_extend("force", opts, { desc = "Open output" }))
+            map("n", "<leader>mh", "<cmd>MoltenHideOutput<cr>", vim.tbl_extend("force", opts, { desc = "Hide output" }))
+            map("n", "<leader>md", "<cmd>MoltenDeleteOutput<cr>",
+              vim.tbl_extend("force", opts, { desc = "Delete output" }))
+
+            -- Navigation
+            map("n", "]m", "<cmd>MoltenNext<cr>", vim.tbl_extend("force", opts, { desc = "Next cell" }))
+            map("n", "[m", "<cmd>MoltenPrev<cr>", vim.tbl_extend("force", opts, { desc = "Previous cell" }))
+
+            -- Create cells
+            map("n", "<leader>ma", function()
+              -- code cell
+              vim.api.nvim_put({ "", "# %%", "" }, "l", true, true)
+            end, vim.tbl_extend("force", opts, { desc = "Add code cell below" }))
+
+            map("n", "<leader>mm", function()
+              -- markdown cell
+              vim.api.nvim_put({ "", "# %% [markdown]", "" }, "l", true, true)
+            end, vim.tbl_extend("force", opts, { desc = "Add markdown cell below" }))
+          end,
+        })
+      end,
+    },
+
+    {
+      "GCBallesteros/NotebookNavigator.nvim",
+      keys = {
+        { "]h",        function() require("notebook-navigator").move_cell "d" end },
+        { "[h",        function() require("notebook-navigator").move_cell "u" end },
+        { "<leader>X", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+        { "<leader>x", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+      },
+      dependencies = {
+        -- "anuvyklack/hydra.nvim",
+      },
+      event = "VeryLazy",
+      config = function()
+        local nn = require "notebook-navigator"
+        -- nn.setup({ activate_hydra_keys = "<leader>h" })
+        nn.setup({
+          repl_provider = "molten"
+        })
+      end,
+    },
+
+    {
+      "GCBallesteros/jupytext.nvim",
+      config = function()
+        require("jupytext").setup({
+          style = "percent",
+          output_extension = "py",
+          force_ft = nil,
+          custom_language_formatting = {},
+        })
+      end,
+    },
+
+    {
+      "PyGamer0/vim-apl",
+      ft = "apl",
+      config = function()
+        local Terminal = require("toggleterm.terminal").Terminal
+
+        local apl_repl = Terminal:new({
+          cmd = "apl --silent",
+          id = 1,
+          direction = "horizontal",
+          hidden = true,
+          close_on_exit = false,
+          on_open = function(term)
+            vim.cmd("startinsert!")
+          end,
+        })
+
+        -- function to ensure REPL is running
+        local function ensure_apl()
+          if not apl_repl:is_open() then
+            apl_repl:toggle()
+          end
+        end
+
+        -- auto-start REPL when opening APL files
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = "apl",
+          callback = function()
+            ensure_apl()
+
+            vim.keymap.set("i", "<C-x>", function()
+              -- ensure_apl()
+              require("toggleterm").send_lines_to_terminal("single_line", true, { args = 1 })
+            end, { desc = "Send current line to APL REPL" })
+
+            vim.keymap.set("n", "<leader>rr", function()
+              -- ensure_apl()
+              require("toggleterm").send_lines_to_terminal("single_line", true, { args = 1 })
+            end, { desc = "Send current line to APL REPL" })
+
+            vim.keymap.set("v", "<leader>rr", function()
+              -- ensure_apl()
+              require("toggleterm").send_lines_to_terminal("visual_selection", false, { args = 1 })
+            end, { desc = "Send visual selection to APL REPL" })
+          end,
+        })
+      end
+    },
+
   }
 })
