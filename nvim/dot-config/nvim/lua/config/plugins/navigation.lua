@@ -1,4 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 local map = vim.keymap.set
 
 return {
@@ -59,7 +60,9 @@ return {
     config = function(_, opts)
       require("nvim-tree").setup(opts)
 
+      local group = augroup("UserNvimTree", { clear = true })
       autocmd("BufEnter", {
+        group = group,
         nested = true,
         callback = function()
           if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then

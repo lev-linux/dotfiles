@@ -1,5 +1,3 @@
-local map = vim.keymap.set
-
 return {
   {
     "akinsho/toggleterm.nvim",
@@ -38,14 +36,6 @@ return {
           end
         end,
       })
-
-      map({ "n", "t" }, "<A-h>", function()
-        require("toggleterm").toggle(1, nil, nil, "horizontal")
-      end, { desc = "Toggle horizontal terminal" })
-
-      map({ "n", "t" }, "<A-v>", function()
-        require("toggleterm").toggle(2, nil, nil, "vertical")
-      end, { desc = "Toggle vertical terminal" })
     end,
   },
 }

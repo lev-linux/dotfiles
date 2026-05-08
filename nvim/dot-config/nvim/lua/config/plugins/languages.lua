@@ -45,6 +45,8 @@ return {
     "PyGamer0/vim-apl",
     ft = "apl",
     config = function()
+      local autocmd = vim.api.nvim_create_autocmd
+      local augroup = vim.api.nvim_create_augroup
       local Terminal = require("toggleterm.terminal").Terminal
       local apl_repl = Terminal:new({
         cmd = "apl --silent",
@@ -63,24 +65,34 @@ return {
         end
       end
 
-      vim.api.nvim_create_autocmd("FileType", {
+      local function setup_apl_buffer(bufnr)
+        ensure_apl()
+
+        vim.keymap.set("i", "<C-x>", function()
+          require("toggleterm").send_lines_to_terminal("single_line", true, { args = 1 })
+        end, { buffer = bufnr, desc = "Send current line to APL REPL" })
+
+        vim.keymap.set("n", "<leader>rr", function()
+          require("toggleterm").send_lines_to_terminal("single_line", true, { args = 1 })
+        end, { buffer = bufnr, desc = "Send current line to APL REPL" })
+
+        vim.keymap.set("v", "<leader>rr", function()
+          require("toggleterm").send_lines_to_terminal("visual_selection", false, { args = 1 })
+        end, { buffer = bufnr, desc = "Send visual selection to APL REPL" })
+      end
+
+      local group = augroup("UserAplRepl", { clear = true })
+      autocmd("FileType", {
+        group = group,
         pattern = "apl",
-        callback = function()
-          ensure_apl()
-
-          vim.keymap.set("i", "<C-x>", function()
-            require("toggleterm").send_lines_to_terminal("single_line", true, { args = 1 })
-          end, { desc = "Send current line to APL REPL" })
-
-          vim.keymap.set("n", "<leader>rr", function()
-            require("toggleterm").send_lines_to_terminal("single_line", true, { args = 1 })
-          end, { desc = "Send current line to APL REPL" })
-
-          vim.keymap.set("v", "<leader>rr", function()
-            require("toggleterm").send_lines_to_terminal("visual_selection", false, { args = 1 })
-          end, { desc = "Send visual selection to APL REPL" })
+        callback = function(ev)
+          setup_apl_buffer(ev.buf)
         end,
       })
+
+      if vim.bo.filetype == "apl" then
+        setup_apl_buffer(vim.api.nvim_get_current_buf())
+      end
     end,
   },
 }

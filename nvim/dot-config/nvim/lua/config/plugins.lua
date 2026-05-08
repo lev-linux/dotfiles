@@ -33,6 +33,24 @@ for _, group in ipairs(groups) do
 end
 
 require("lazy").setup({
+  change_detection = {
+    notify = false,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "rplugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
   ui = {
     border = "rounded",
   },

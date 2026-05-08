@@ -1,7 +1,9 @@
 local M = {}
 
 function M.setup_lsp_attach_keymaps()
+  local group = vim.api.nvim_create_augroup("UserLspAttachKeymaps", { clear = true })
   vim.api.nvim_create_autocmd("LspAttach", {
+    group = group,
     callback = function(ev)
       local lmap = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc, silent = true })
