@@ -55,7 +55,7 @@ readexpr() {
              [ -n "$fexpr" ] && readexpr ;;
         \$*) cmd="${fexpr:1}" ;;
         *)   mapexpr && readexpr
-             cmd="find $fexpr -print0" ;;
+             cmd="find . $fexpr -print0" ;;
     esac
 }
 
@@ -84,6 +84,6 @@ if [ -n "$fexpr" ]; then
     if [ -n "$fexpr" ]; then
         tail -n"$NNN_FINDHISTLEN" "$NNN_FINDHIST" > "$TMPDIR/finderbms"
         printf "%s\n" "$fexpr" >> "$TMPDIR/finderbms"
-        mv "$TMPDIR/finderbms" "$NNN_FINDHIST"
+        mv -- "$TMPDIR/finderbms" "$NNN_FINDHIST"
     fi
 fi
