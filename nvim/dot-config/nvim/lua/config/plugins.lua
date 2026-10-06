@@ -18,7 +18,6 @@ local groups = {
   "config.plugins.lsp",
   "config.plugins.search",
   "config.plugins.completion",
-  "config.plugins.ai",
   "config.plugins.ui",
   "config.plugins.navigation",
   "config.plugins.editing",
