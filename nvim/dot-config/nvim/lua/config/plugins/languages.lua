@@ -36,7 +36,7 @@ return {
       vim.g.tex_conceal = "abdmg"
 
       vim.g.vimtex_compiler_latexmk_engines = {
-        _ = "-xelatex",
+        _ = "-lualatex",
       }
       vim.g.vimtex_compiler_latexmk_continuous = 1
       vim.g.vimtex_compiler_latexmk = {
