@@ -18,7 +18,7 @@ function M.setup_lsp_attach_keymaps()
       lmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
       lmap("n", "<leader>fm", function() vim.lsp.buf.format({ async = true }) end, "Format buffer")
       lmap("n", "<leader>lf", function() vim.diagnostic.open_float({ border = "rounded" }) end, "Line diagnostics")
-      lmap("n", "<leader>q", vim.diagnostic.setloclist, "Diagnostics to loclist")
+      lmap("n", "<leader>ld", vim.diagnostic.setloclist, "Diagnostics to loclist")
       lmap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
       lmap("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
         "List workspace folders")
