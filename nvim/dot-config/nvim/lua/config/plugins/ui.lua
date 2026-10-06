@@ -15,17 +15,30 @@ return {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()
-      local mode = vim.fn.system("darkman get"):gsub("%s+", "")
       require("gruvbox").setup({
         contrast = "hard",
         transparent_mode = true,
       })
-      if mode == "light" then
-        vim.o.background = "light"
-      else
-        vim.o.background = "dark"
-      end
+      vim.o.background = "dark"
       vim.cmd("colorscheme gruvbox")
+
+      local function sync_background()
+        vim.system({ "darkman", "get" }, { text = true }, function(obj)
+          if obj.code ~= 0 then
+            return
+          end
+          local mode = obj.stdout:gsub("%s+", "")
+          vim.schedule(function()
+            vim.o.background = (mode == "light") and "light" or "dark"
+          end)
+        end)
+      end
+
+      sync_background()
+
+      -- darkman notifies running instances of a theme switch via SIGUSR1
+      local sigusr1 = vim.uv.new_signal()
+      sigusr1:start("sigusr1", vim.schedule_wrap(sync_background))
     end,
   },
   {
