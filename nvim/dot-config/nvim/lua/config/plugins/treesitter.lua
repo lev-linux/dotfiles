@@ -14,9 +14,8 @@ return {
         auto_install = false,
 
         ensure_installed = {
-          "lua", "vim", "vimdoc", "bash",
-          "c", "cpp", "python", "javascript", "typescript",
-          "html", "css", "json", "yaml", "toml", "markdown",
+          "lua", "vim", "vimdoc", "bash", "c", "cpp", "python", "javascript",
+          "typescript", "html", "css", "json", "yaml", "toml",
         },
 
         highlight = {
