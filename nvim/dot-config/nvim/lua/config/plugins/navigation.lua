@@ -10,8 +10,7 @@ return {
     },
     cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
     keys = {
-      { "<C-n>", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" },
-      { "<leader>o", "<cmd>NvimTreeFocus<cr>", desc = "Focus Explorer" },
+      { "<C-n>", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Toggle Explorer" },
     },
     opts = {
       hijack_cursor = true,
