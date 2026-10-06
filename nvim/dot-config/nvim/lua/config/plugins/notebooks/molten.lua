@@ -9,6 +9,9 @@ return {
       opts = {
         backend = "ueberzug",
         processor = "magick_cli",
+        integrations = {
+          markdown = { enabled = false },
+        },
       },
     },
   },
