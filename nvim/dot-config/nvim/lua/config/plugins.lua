@@ -26,6 +26,7 @@ local groups = {
   "config.plugins.terminals",
   "config.plugins.languages",
   "config.plugins.notebooks",
+  "config.plugins.tools"
 }
 
 for _, group in ipairs(groups) do
