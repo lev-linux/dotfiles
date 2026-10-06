@@ -42,3 +42,6 @@ opt.listchars = {
 -- vim.cmd [[highlight ExtraWhitespace guibg=red]] -- highlight trailing spaces
 -- vim.cmd [[match ExtraWhitespace /\s\+$/]]
 vim.api.nvim_set_hl(0, "SpellBad", { undercurl = true, underline = false, sp = "red" })
+
+-- Disable ttyfast for simple terminal
+opt.ttyfast = false
