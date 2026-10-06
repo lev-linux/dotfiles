@@ -55,16 +55,16 @@ return {
     end
 
     local group = augroup("UserMoltenPython", { clear = true })
-    autocmd("FileType", {
-      group = group,
-      pattern = "python",
-      callback = function(ev)
-        setup_python_buffer(ev.buf)
-      end,
-    })
+    -- autocmd("FileType", {
+    --   group = group,
+    --   pattern = "python",
+    --   callback = function(ev)
+    --     setup_python_buffer(ev.buf)
+    --   end,
+    -- })
 
-    if vim.bo.filetype == "python" then
-      setup_python_buffer(vim.api.nvim_get_current_buf())
-    end
+    -- if vim.bo.filetype == "python" then
+    --   setup_python_buffer(vim.api.nvim_get_current_buf())
+    -- end
   end,
 }
