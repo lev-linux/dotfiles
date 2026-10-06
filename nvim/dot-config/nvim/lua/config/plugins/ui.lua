@@ -45,7 +45,19 @@ return {
       })
     end,
     keys = {
-      { "<leader>qq", "<cmd>copen<cr>", desc = "Toggle quickfix" },
+      { "<leader>q",
+        function()
+          local qf_open = vim.tbl_contains(
+            vim.tbl_map(function(win)
+              return win.quickfix
+            end, vim.fn.getwininfo()),
+            1
+          )
+
+          vim.cmd(qf_open and "cclose" or "copen")
+        end,
+        desc = "Toggle quickfix",
+      },
     },
   },
   {
