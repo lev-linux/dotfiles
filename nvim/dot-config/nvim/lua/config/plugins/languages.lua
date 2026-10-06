@@ -30,6 +30,7 @@ return {
       vim.g.vimtex_complete_enabled = 1
       vim.g.vimtex_indent_enabled = 1
       vim.g.vimtex_format_enabled = 1
+      vim.g.vimtex_view_automatic = 1
 
       vim.opt.conceallevel = 2
       vim.g.tex_conceal = "abdmg"
