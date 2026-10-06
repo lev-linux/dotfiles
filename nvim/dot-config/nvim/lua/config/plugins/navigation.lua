@@ -72,8 +72,8 @@ return {
     end,
   },
   {
-    "phaazon/hop.nvim",
-    branch = "v2",
+    "smoka7/hop.nvim",
+    version = "*",
     lazy = true,
     keys = {
       { "<leader>h", mode = { "n", "v" }, desc = "Hop to char" },
