@@ -26,9 +26,9 @@ return {
           enabled = false,
         },
         filetypes = {
-          markdown = false,
+          markdown = true,
           help = false,
-          gitcommit = false,
+          gitcommit = true,
           ["*"] = true,
         },
       })
