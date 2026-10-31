@@ -63,6 +63,9 @@ super + w
 super + control + c
 	clipmenu -W 1000 -l 15
 
+super + control + shift + c
+	joinlines && notify-send "joinlines" "Clipboard lines joined"
+
 super + ctrl + d
 	darkman toggle
 

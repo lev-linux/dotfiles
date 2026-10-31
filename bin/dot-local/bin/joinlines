@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Join lines in the clipboard into a single line.
+# Paragraphs (separated by blank lines) are kept apart.
+
+xclip -o -selection clipboard |
+	awk 'NF { gsub(/^[ \t]+|[ \t]+$/, ""); line = line (line ? " " : "") $0; next }
+	     line { print line; line = "" }
+	     END { if (line) print line }' |
+	sed '$!s/$/\n/' |
+	head -c -1 |
+	xclip -selection clipboard
