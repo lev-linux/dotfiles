@@ -1,0 +1,29 @@
+#!/bin/bash
+# Run autorandr when a monitor is plugged in or removed.
+#
+# The NVIDIA driver sends no udev hotplug events for HDMI-1-0, so autorandr's
+# udev rule never fires. X itself still reports output changes as RandR events,
+# so listen for those instead.
+#
+# autorandr's own mode changes also emit RandR events, so only act when the set
+# of connected outputs (names + EDIDs) actually changes; otherwise a profile
+# whose postswitch hook alters the layout (projector) would loop forever.
+
+state() {
+	xrandr --current --props | awk '
+		/^[^ \t]/ { print $1, $2; next }   # "HDMI-1-0 connected" / "disconnected"
+		/^\t\t[0-9a-f]+$/ { print }        # EDID bytes'
+}
+
+last=$(state)
+
+xev -root -event randr | while read -r line; do
+	[[ $line == *XRROutputChangeNotifyEvent* ]] || continue
+	# plugging in emits a burst of events (often connect/disconnect/connect);
+	# wait until it has been quiet for a second
+	while read -r -t 1 _; do :; done
+	now=$(state)
+	[[ $now == "$last" ]] && continue
+	last=$now
+	autorandr --change --default default
+done

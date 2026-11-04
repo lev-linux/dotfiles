@@ -2,8 +2,11 @@
 exec >/dev/null 2>&1
 
 xrandr --setprovideroutputsource nvidia iGPU
-xrandr --auto
-xrandr --output eDP-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-0 --mode 1920x1080 --right-of eDP-1-1 --rotate normal --dpi 100
+# layouts live in ~/.config/autorandr (docked, projector, default)
+autorandr --change --default default
+xrandr --dpi 100
+# re-run autorandr on hotplug (udev gets no events from the NVIDIA HDMI port)
+"$HOME/.local/bin/autorandr-watch" &
 
 # syncthing --no-browser &
 # kmonad ~/.config/kmonad.kbd &

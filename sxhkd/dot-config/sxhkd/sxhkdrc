@@ -129,3 +129,7 @@ ctrl + shift + space
 
 alt + space
 	pkill -RTMIN+7 dwmblocks
+
+# Re-apply autorandr profile (manual fallback for autorandr-watch)
+super + ctrl + m
+	autorandr --change --default default
